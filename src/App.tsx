@@ -20,7 +20,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/auth" element={<Auth />} />
+          <Route path="/" element={<Auth />} />
           <Route
             path="/*"
             element={
@@ -28,7 +28,7 @@ const App = () => (
                 <Navigation />
                 <main className="pt-24 md:pt-28 pb-12 px-4 container mx-auto">
                   <Routes>
-                    <Route path="/" element={<YourInfo />} />
+                    <Route path="/dashboard" element={<YourInfo />} />
                     <Route path="/learn" element={<Learn />} />
                     <Route path="/quiz" element={<QuizGames />} />
                     <Route path="/create" element={<Create />} />

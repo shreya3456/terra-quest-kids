@@ -30,7 +30,7 @@ const Auth = () => {
     
     // Navigate to main app
     setTimeout(() => {
-      navigate("/");
+      navigate("/dashboard");
     }, 1000);
   };
 

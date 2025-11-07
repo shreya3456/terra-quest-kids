@@ -3,7 +3,7 @@ import { User, BookOpen, Gamepad2, Sparkles } from "lucide-react";
 
 const Navigation = () => {
   const navItems = [
-    { to: "/", label: "Your Info", icon: User },
+    { to: "/dashboard", label: "Your Info", icon: User },
     { to: "/learn", label: "Learn", icon: BookOpen },
     { to: "/quiz", label: "Quiz & Games", icon: Gamepad2 },
     { to: "/create", label: "Create", icon: Sparkles },

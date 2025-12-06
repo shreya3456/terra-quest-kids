@@ -9,6 +9,7 @@ import YourInfo from "./pages/YourInfo";
 import Learn from "./pages/Learn";
 import QuizGames from "./pages/QuizGames";
 import Create from "./pages/Create";
+import MapRo from "./pages/MapRo";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
                     <Route path="/dashboard" element={<YourInfo />} />
                     <Route path="/learn" element={<Learn />} />
                     <Route path="/quiz" element={<QuizGames />} />
+                    <Route path="/mapro" element={<MapRo />} />
                     <Route path="/create" element={<Create />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />

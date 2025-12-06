@@ -1,8 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { User, Users, Map } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const QuizGames = () => {
+  const navigate = useNavigate();
+  
   const gameModesData = [
     {
       title: "Single Player",
@@ -10,6 +13,7 @@ const QuizGames = () => {
       color: "from-primary to-eco-green",
       description: "Challenge yourself with solo quizzes and puzzles!",
       emoji: "🎲",
+      action: () => {},
     },
     {
       title: "Multiplayer",
@@ -17,6 +21,7 @@ const QuizGames = () => {
       color: "from-secondary to-eco-blue",
       description: "Compete with friends in exciting group challenges!",
       emoji: "🧩",
+      action: () => {},
     },
     {
       title: "MapRo - Punjab",
@@ -24,6 +29,7 @@ const QuizGames = () => {
       color: "from-accent to-eco-yellow",
       description: "Explore Punjab's map and discover environmental hotspots!",
       emoji: "🗺️",
+      action: () => navigate("/mapro"),
     },
   ];
 
@@ -57,7 +63,10 @@ const QuizGames = () => {
             <CardContent className="p-6 space-y-4">
               <h3 className="text-2xl font-bold text-foreground">{mode.title}</h3>
               <p className="text-muted-foreground">{mode.description}</p>
-              <Button className="w-full rounded-xl bg-gradient-to-r from-primary to-secondary hover:shadow-lg transition-all duration-300 text-lg py-6">
+              <Button 
+                onClick={mode.action}
+                className="w-full rounded-xl bg-gradient-to-r from-primary to-secondary hover:shadow-lg transition-all duration-300 text-lg py-6"
+              >
                 Start Playing! 🚀
               </Button>
             </CardContent>

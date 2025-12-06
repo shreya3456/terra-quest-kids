@@ -39,10 +39,10 @@ All colors MUST be HSL.
     --radius: 1rem;
     
     --eco-green: 122 39% 49%;
-    --sky-blue: 199 98% 48%;
-    --sunshine-yellow: 54 100% 62%;
-    --leaf-green: 140 60% 45%;
-    --ocean-blue: 210 80% 55%;
+    --eco-blue: 199 98% 48%;
+    --eco-yellow: 54 100% 62%;
+    --eco-leaf: 140 60% 45%;
+    --eco-ocean: 210 80% 55%;
     
     --gradient-nature: linear-gradient(135deg, hsl(122 39% 49%) 0%, hsl(199 98% 48%) 100%);
     --gradient-sunshine: linear-gradient(135deg, hsl(54 100% 62%) 0%, hsl(199 98% 48%) 100%);

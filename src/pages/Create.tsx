@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import QuestModal from "@/components/QuestModal";
 import {
   Leaf,
   ShoppingBag,
@@ -11,9 +13,25 @@ import {
   Bike,
   Pencil,
   Ban,
+  LucideIcon,
 } from "lucide-react";
 
+interface Activity {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  points: number;
+  color: string;
+}
+
 const Create = () => {
+  const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleStartQuest = (activity: Activity) => {
+    setSelectedActivity(activity);
+    setIsModalOpen(true);
+  };
   const activities = [
     {
       title: "Say No to Pesticides",
@@ -116,7 +134,10 @@ const Create = () => {
               <p className="text-sm text-muted-foreground line-clamp-2">{activity.description}</p>
             </CardContent>
             <CardFooter className="p-5 pt-0 flex gap-2">
-              <Button className="flex-1 rounded-xl bg-gradient-to-r from-primary to-eco-green hover:shadow-lg transition-all duration-300">
+              <Button 
+                onClick={() => handleStartQuest(activity)}
+                className="flex-1 rounded-xl bg-gradient-to-r from-primary to-eco-green hover:shadow-lg hover:scale-105 transition-all duration-300"
+              >
                 🚀 Start Quest
               </Button>
               <Button
@@ -143,6 +164,13 @@ const Create = () => {
           </div>
         </div>
       </Card>
+
+      {/* Quest Modal */}
+      <QuestModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        activity={selectedActivity}
+      />
     </div>
   );
 };

@@ -52,10 +52,10 @@ export default {
         },
         eco: {
           green: "hsl(var(--eco-green))",
-          blue: "hsl(var(--sky-blue))",
-          yellow: "hsl(var(--sunshine-yellow))",
-          leaf: "hsl(var(--leaf-green))",
-          ocean: "hsl(var(--ocean-blue))",
+          blue: "hsl(var(--eco-blue))",
+          yellow: "hsl(var(--eco-yellow))",
+          leaf: "hsl(var(--eco-leaf))",
+          ocean: "hsl(var(--eco-ocean))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

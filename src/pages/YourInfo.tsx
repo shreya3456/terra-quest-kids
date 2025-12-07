@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Users, Award, Trophy } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import EcoPointsModal from "@/components/EcoPointsModal";
+import FriendsModal from "@/components/FriendsModal";
 
 const YourInfo = () => {
   const [isEcoPointsModalOpen, setIsEcoPointsModalOpen] = useState(false);
+  const [isFriendsModalOpen, setIsFriendsModalOpen] = useState(false);
   const totalEcoPoints = 1250;
 
   const studentInfo = {
@@ -14,9 +16,9 @@ const YourInfo = () => {
   };
 
   const stats = [
-    { label: "Friends", value: "24", icon: Users, color: "from-secondary to-eco-blue", clickable: false },
-    { label: "Eco Points", value: totalEcoPoints.toLocaleString(), icon: Award, color: "from-accent to-eco-yellow", clickable: true },
-    { label: "League Level", value: "Silver", icon: Trophy, color: "from-primary to-eco-green", clickable: false },
+    { label: "Friends", value: "24", icon: Users, color: "from-secondary to-eco-blue", clickable: true, action: "friends" },
+    { label: "Eco Points", value: totalEcoPoints.toLocaleString(), icon: Award, color: "from-accent to-eco-yellow", clickable: true, action: "points" },
+    { label: "League Level", value: "Silver", icon: Trophy, color: "from-primary to-eco-green", clickable: false, action: "" },
   ];
 
   return (
@@ -53,7 +55,10 @@ const YourInfo = () => {
         {stats.map((stat, index) => (
           <Card
             key={stat.label}
-            onClick={() => stat.clickable && setIsEcoPointsModalOpen(true)}
+            onClick={() => {
+              if (stat.action === "friends") setIsFriendsModalOpen(true);
+              else if (stat.action === "points") setIsEcoPointsModalOpen(true);
+            }}
             className={`overflow-hidden border-2 border-border hover:border-primary/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
               stat.clickable ? "cursor-pointer ring-2 ring-transparent hover:ring-accent/50" : "cursor-default"
             }`}
@@ -77,12 +82,9 @@ const YourInfo = () => {
         ))}
       </div>
 
-      {/* Eco Points Modal */}
-      <EcoPointsModal
-        isOpen={isEcoPointsModalOpen}
-        onClose={() => setIsEcoPointsModalOpen(false)}
-        totalPoints={totalEcoPoints}
-      />
+      {/* Modals */}
+      <EcoPointsModal isOpen={isEcoPointsModalOpen} onClose={() => setIsEcoPointsModalOpen(false)} totalPoints={totalEcoPoints} />
+      <FriendsModal isOpen={isFriendsModalOpen} onClose={() => setIsFriendsModalOpen(false)} />
 
       {/* Progress Section */}
       <Card className="border-2 border-border shadow-lg">

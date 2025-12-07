@@ -1,10 +1,38 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { User, Users, Map } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import GameSelectionPanel from "@/components/games/GameSelectionPanel";
+import WasteSortingGame from "@/components/games/WasteSortingGame";
+import WordSearchGame from "@/components/games/WordSearchGame";
+import EcoQuizGame from "@/components/games/EcoQuizGame";
+import TreasureHuntGame from "@/components/games/TreasureHuntGame";
+import { useToast } from "@/hooks/use-toast";
 
 const QuizGames = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [showGameSelection, setShowGameSelection] = useState<"single" | "multi" | null>(null);
+  const [activeGame, setActiveGame] = useState<string | null>(null);
+  const [totalPoints, setTotalPoints] = useState(0);
+
+  const handleGameComplete = (points: number) => {
+    setTotalPoints(prev => prev + points);
+    toast({
+      title: "🎉 Game Complete!",
+      description: `You earned ${points} eco points! Keep playing to earn more.`,
+    });
+  };
+
+  const handleSelectGame = (gameId: string) => {
+    setShowGameSelection(null);
+    setActiveGame(gameId);
+  };
+
+  const closeGame = () => {
+    setActiveGame(null);
+  };
   
   const gameModesData = [
     {
@@ -13,7 +41,7 @@ const QuizGames = () => {
       color: "from-primary to-eco-green",
       description: "Challenge yourself with solo quizzes and puzzles!",
       emoji: "🎲",
-      action: () => {},
+      action: () => setShowGameSelection("single"),
     },
     {
       title: "Multiplayer",
@@ -21,7 +49,7 @@ const QuizGames = () => {
       color: "from-secondary to-eco-blue",
       description: "Compete with friends in exciting group challenges!",
       emoji: "🧩",
-      action: () => {},
+      action: () => setShowGameSelection("multi"),
     },
     {
       title: "MapRo - Punjab",
@@ -87,12 +115,35 @@ const QuizGames = () => {
               <div className="text-muted-foreground">Average Score</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-accent">12</div>
+              <div className="text-4xl font-bold text-accent">{12 + Math.floor(totalPoints / 50)}</div>
               <div className="text-muted-foreground">Badges Earned</div>
             </div>
           </div>
         </div>
       </Card>
+
+      {/* Game Selection Panels */}
+      {showGameSelection && (
+        <GameSelectionPanel
+          mode={showGameSelection}
+          onClose={() => setShowGameSelection(null)}
+          onSelectGame={handleSelectGame}
+        />
+      )}
+
+      {/* Active Games */}
+      {activeGame === "waste-sorting" && (
+        <WasteSortingGame onClose={closeGame} onComplete={handleGameComplete} />
+      )}
+      {activeGame === "word-search" && (
+        <WordSearchGame onClose={closeGame} onComplete={handleGameComplete} />
+      )}
+      {activeGame === "eco-quiz" && (
+        <EcoQuizGame onClose={closeGame} onComplete={handleGameComplete} />
+      )}
+      {activeGame === "treasure-hunt" && (
+        <TreasureHuntGame onClose={closeGame} onComplete={handleGameComplete} />
+      )}
     </div>
   );
 };

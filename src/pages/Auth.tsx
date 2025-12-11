@@ -28,9 +28,13 @@ const Auth = () => {
     // Simple login logic - in a real app, this would validate against a backend
     toast.success(`Welcome back, ${activeTab}! 🌿`);
     
-    // Navigate to main app
+    // Navigate based on user role
     setTimeout(() => {
-      navigate("/dashboard");
+      if (activeTab === "faculty") {
+        navigate("/faculty/dashboard");
+      } else {
+        navigate("/dashboard");
+      }
     }, 1000);
   };
 
